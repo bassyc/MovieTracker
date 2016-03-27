@@ -36,7 +36,26 @@ public class MovieContract {
                 "vnd.android.cursor.item/" + CONTENT_URI + "/" + PATH_MOVIE;
 
         public static final String TABLE_NAME = "movieTable";
-
+        public static final String COLUMN_TITLE = "title";
+        public static final String COLUMN_YEAR = "year";
+        public static final String COLUMN_RATED = "rated";
+        public static final String COLUMN_RELEASED = "released";
+        public static final String COLUMN_RUNTIME = "runtime";
+        public static final String COLUMN_GENRE = "genre";
+        public static final String COLUMN_DIRECTOR = "director";
+        public static final String COLUMN_WRITER = "writer";
+        public static final String COLUMN_ACTORS = "actors";
+        public static final String COLUMN_PLOT = "plot";
+        public static final String COLUMN_LANGUAGE = "language";
+        public static final String COLUMN_COUNTRY = "country";
+        public static final String COLUMN_AWARDS = "awards";
+        public static final String COLUMN_POSTER = "poster";
+        public static final String COLUMN_METASCORE = "metascore";
+        public static final String COLUMN_RATING = "imdbRating";
+        public static final String COLUMN_VOTES = "imdbVotes";
+        public static final String COLUMN_ID = "imdbID";
+        public static final String COLUMN_TYPE = "type";
+        public static final String COLUMN_RESPONSE = "response";
         public static final String COLUMN_WATCHED = "watched";
 
         public static Uri buildAnnouncementUri(long id){
