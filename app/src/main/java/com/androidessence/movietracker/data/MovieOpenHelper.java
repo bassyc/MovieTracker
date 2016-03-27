@@ -49,6 +49,7 @@ public class MovieOpenHelper extends SQLiteOpenHelper {
                         MovieContract.MovieEntry.COLUMN_RATING +    " TEXT DEFAULT '', " +
                         MovieContract.MovieEntry.COLUMN_VOTES +     " TEXT DEFAULT '', " +
                         MovieContract.MovieEntry.COLUMN_ID +        " TEXT DEFAULT '', " +
+                        MovieContract.MovieEntry.COLUMN_TYPE +      " TEXT DEFAULT '', " +
                         MovieContract.MovieEntry.COLUMN_RESPONSE +  " TEXT DEFAULT '', " +
                         MovieContract.MovieEntry.COLUMN_WATCHED +   " INTEGER DEFAULT 0);"
         );
