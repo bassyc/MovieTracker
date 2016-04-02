@@ -119,7 +119,7 @@ public class MovieProvider extends ContentProvider {
 
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
-        int rows = 0;
+        int rows;
         SQLiteDatabase db = mOpenHelper.getReadableDatabase();
 
         switch(sUriMatcher.match(uri)) {
@@ -139,7 +139,7 @@ public class MovieProvider extends ContentProvider {
 
     @Override
     public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
-        int rows = 0;
+        int rows;
         SQLiteDatabase db = mOpenHelper.getReadableDatabase();
 
         switch(sUriMatcher.match(uri)) {

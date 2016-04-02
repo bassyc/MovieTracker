@@ -60,7 +60,7 @@ public class MainActivityFragment extends Fragment {
 
         Log.v(LOG_TAG, "About to read.");
 
-        omdbapi.getMovieByTitle("Harry+Potter", new Callback<Movie>() {
+        omdbapi.getMovieByTitle("Cloverfield", new Callback<Movie>() {
             @Override
             public void success(Movie movie, Response response) {
                 Log.v(LOG_TAG, "SUCCESS ONE!");
@@ -74,7 +74,7 @@ public class MainActivityFragment extends Fragment {
             }
         });
 
-        omdbapi.getMoviesWithTitle("Harry+Potter", new Callback<MovieList>() {
+        omdbapi.getMoviesWithTitle("Cloverfield", new Callback<MovieList>() {
             @Override
             public void success(MovieList omdbModels, Response response) {
                 Log.v(LOG_TAG, "SUCCESS!");
@@ -83,6 +83,7 @@ public class MainActivityFragment extends Fragment {
 
                 for(Movie movie : omdbModels.getSearch()) {
                     Log.v(LOG_TAG, movie.getTitle());
+                    Log.v(LOG_TAG, String.valueOf(movie.getYear()));
                 }
 
                 setupRecyclerView(omdbModels.getSearch());
