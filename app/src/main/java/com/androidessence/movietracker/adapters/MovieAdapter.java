@@ -66,7 +66,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         public void onClick(View v) {
             // Show popup for movie
             PopupMenu popupMenu = new PopupMenu(mContext, v);
-            popupMenu.getMenuInflater().inflate(R.menu.movie_menu, popupMenu.getMenu());
+            //TODO: Create movie menu.
+            // popupMenu.getMenuInflater().inflate(R.menu.movie_menu, popupMenu.getMenu());
             popupMenu.setGravity(Gravity.END);
             popupMenu.show();
         }

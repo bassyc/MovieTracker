@@ -37,7 +37,7 @@
         <item name="android:textColorHint">@android:color/black</item>
 
         <!-- Hint for edit text-->
-        <item name="android:hint">@string/search</item>
+        <item name="android:hint">@string/search_hint</item>
     </style>
 
 </resources>

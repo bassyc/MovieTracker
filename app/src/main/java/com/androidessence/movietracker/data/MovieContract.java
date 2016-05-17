@@ -25,6 +25,7 @@ public class MovieContract {
     private static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
 
     public static final String PATH_MOVIE = "movie";
+    public static final String PATH_SEARCH = "search";
 
     public static final class MovieEntry implements BaseColumns {
         public static final Uri CONTENT_URI =
@@ -59,6 +60,24 @@ public class MovieContract {
         public static final String COLUMN_WATCHED = "watched";
 
         public static Uri buildAnnouncementUri(long id){
+            return ContentUris.withAppendedId(CONTENT_URI, id);
+        }
+    }
+
+    public static final class SearchEntry implements BaseColumns {
+        public static final Uri CONTENT_URI =
+                BASE_CONTENT_URI.buildUpon().appendPath(PATH_SEARCH).build();
+
+        public static final String CONTENT_TYPE =
+                "vnd.android.cursor.dir/" + CONTENT_URI + "/" + PATH_SEARCH;
+        public static final String CONTENT_ITEM_TYPE =
+                "vnd.android.cursor.item/" + CONTENT_URI + "/" + PATH_SEARCH;
+
+        public static final String TABLE_NAME = "searchTable";
+        public static final String COLUMN_TEXT = "searchText";
+        public static final String COLUMN_LAST_SEARCH = "lastSearch";
+
+        public static Uri buildSearchUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
         }
     }

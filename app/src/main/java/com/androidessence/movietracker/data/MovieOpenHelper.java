@@ -20,6 +20,7 @@ public class MovieOpenHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         createMovieTable(db);
+        createSearchTable(db);
     }
 
     @Override
@@ -52,6 +53,15 @@ public class MovieOpenHelper extends SQLiteOpenHelper {
                         MovieContract.MovieEntry.COLUMN_TYPE +      " TEXT DEFAULT '', " +
                         MovieContract.MovieEntry.COLUMN_RESPONSE +  " TEXT DEFAULT '', " +
                         MovieContract.MovieEntry.COLUMN_WATCHED +   " INTEGER DEFAULT 0);"
+        );
+    }
+
+    private void createSearchTable(SQLiteDatabase db) {
+        db.execSQL(
+                "CREATE TABLE " + MovieContract.SearchEntry.TABLE_NAME + " (" +
+                        MovieContract.SearchEntry._ID + " INTEGER PRIMARY KEY, " +
+                        MovieContract.SearchEntry.COLUMN_TEXT + " TEXT UNIQUE NOT NULL, " +
+                        MovieContract.SearchEntry.COLUMN_LAST_SEARCH + " INTEGER NOT NULL);"
         );
     }
 }

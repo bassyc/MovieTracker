@@ -19,6 +19,8 @@ public class MovieProvider extends ContentProvider {
     private static final int MOVIE_ID = 1;
     private static final int MOVIE_WATCHED = 2;
     private static final int MOVIE_UNWATCHED = 3;
+    private static final int SEARCH = 10;
+    private static final int SEARCH_ID = 11;
 
     private MovieOpenHelper mOpenHelper;
     private static final UriMatcher sUriMatcher = buildUriMatcher();
@@ -29,6 +31,8 @@ public class MovieProvider extends ContentProvider {
         UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
         matcher.addURI(content, MovieContract.PATH_MOVIE, MOVIE);
         matcher.addURI(content, MovieContract.PATH_MOVIE + "/#", MOVIE_ID);
+        matcher.addURI(content, MovieContract.PATH_SEARCH, SEARCH);
+        matcher.addURI(content, MovieContract.PATH_SEARCH + "/#", SEARCH_ID);
 
         return matcher;
     }
@@ -69,6 +73,29 @@ public class MovieProvider extends ContentProvider {
                         sortOrder
                 );
                 break;
+            case SEARCH:
+                retCursor = db.query(
+                        MovieContract.SearchEntry.TABLE_NAME,
+                        projection,
+                        selection,
+                        selectionArgs,
+                        null,
+                        null,
+                        sortOrder
+                );
+                break;
+            case SEARCH_ID:
+                _id = ContentUris.parseId(uri);
+                retCursor = db.query(
+                        MovieContract.SearchEntry.TABLE_NAME,
+                        projection,
+                        MovieContract.SearchEntry._ID + " = ?",
+                        new String[] {String.valueOf(_id)},
+                        null,
+                        null,
+                        sortOrder
+                );
+                break;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
@@ -87,6 +114,10 @@ public class MovieProvider extends ContentProvider {
                 return MovieContract.MovieEntry.CONTENT_TYPE;
             case MOVIE_ID:
                 return MovieContract.MovieEntry.CONTENT_ITEM_TYPE;
+            case SEARCH:
+                return MovieContract.SearchEntry.CONTENT_TYPE;
+            case SEARCH_ID:
+                return MovieContract.SearchEntry.CONTENT_ITEM_TYPE;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
@@ -104,6 +135,14 @@ public class MovieProvider extends ContentProvider {
                 _id = db.insert(MovieContract.MovieEntry.TABLE_NAME, null, values);
                 if(_id > 0) {
                     returnUri = MovieContract.MovieEntry.buildAnnouncementUri(_id);
+                } else {
+                    throw new UnsupportedOperationException("Unable to insert row into: " + uri);
+                }
+                break;
+            case SEARCH:
+                _id = db.insert(MovieContract.SearchEntry.TABLE_NAME, null, values);
+                if(_id > 0) {
+                    returnUri = MovieContract.SearchEntry.buildSearchUri(_id);
                 } else {
                     throw new UnsupportedOperationException("Unable to insert row into: " + uri);
                 }
@@ -126,6 +165,9 @@ public class MovieProvider extends ContentProvider {
             case MOVIE:
                 rows = db.delete(MovieContract.MovieEntry.TABLE_NAME, selection, selectionArgs);
                 break;
+            case SEARCH:
+                rows = db.delete(MovieContract.SearchEntry.TABLE_NAME, selection, selectionArgs);
+                break;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
@@ -145,6 +187,9 @@ public class MovieProvider extends ContentProvider {
         switch(sUriMatcher.match(uri)) {
             case MOVIE:
                 rows = db.update(MovieContract.MovieEntry.TABLE_NAME, values, selection, selectionArgs);
+                break;
+            case SEARCH:
+                rows = db.update(MovieContract.SearchEntry.TABLE_NAME, values, selection, selectionArgs);
                 break;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);

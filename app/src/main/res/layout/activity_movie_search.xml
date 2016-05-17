@@ -6,8 +6,7 @@
     tools:context=".activities.MovieSearchActivity"
     android:orientation="vertical">
 
-    <include layout="@layout/search_toolbar"/>
-
+    <!-- Must put FAB first so that MSV appears on top of it. -->
     <!-- TODO: Add 16dp dimension. -->
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/movie_search_fab"
@@ -16,5 +15,7 @@
         android:layout_margin="16dp"
         android:src="@drawable/ic_search_white_24dp"
         android:layout_gravity="bottom|end"/>
+
+    <include layout="@layout/search_toolbar"/>
 
 </android.support.design.widget.CoordinatorLayout>
